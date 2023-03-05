@@ -1,0 +1,12 @@
+' You can use === code === to display synchronization bars.
+
+@startuml
+(*) --> ===B1=== 
+--> "Parallel Action 1"
+--> ===B2===
+
+===B1=== --> "Parallel Action 2"
+--> ===B2===
+
+--> (*)
+@enduml
