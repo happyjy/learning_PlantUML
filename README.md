@@ -4,7 +4,8 @@ PlantUML을 익히는 repository 입니다.
 
 # 공식 문서
 
-https://plantuml.com/ko/
+- https://plantuml.com/ko/
+- https://github.com/qjebbs/vscode-plantuml
 
 # short cut
 
