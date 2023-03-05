@@ -1,0 +1,9 @@
+' 15.1 Archimate keyword
+' You can use the archimate keyword to define an element. Stereotype can optionally specify an additional icon. Some colors (Business, Application, Motivation, Strategy, Technology, Physical,
+' Implementation) are also available.
+@startuml
+archimate #Technology "VPN Server" as vpnServerA <<technology-device>>
+rectangle GO #lightgreen
+rectangle STOP #red
+rectangle WAIT #orange
+@enduml

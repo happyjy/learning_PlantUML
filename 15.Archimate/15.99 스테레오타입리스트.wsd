@@ -1,0 +1,70 @@
+@startuml
+
+sprite $bProcess jar:archimate/business-process
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+sprite $AapplicationComponent jar:archimate/application-component
+sprite $AapplicationEvent jar:archimate/application-event
+sprite $AapplicationFunction jar:archimate/application-function
+sprite $AapplicationInteraction jar:archimate/application-interaction
+sprite $AapplicationInterface jar:archimate/application-interface
+sprite $AapplicationProcess jar:archimate/application-process
+sprite $AapplicationService jar:archimate/application-service
+sprite $AbusinessActor jar:archimate/business-actor
+sprite $AbusinessCollaboration jar:archimate/business-collaboration
+sprite $AbusinessEvent jar:archimate/business-event
+sprite $AbusinessFunction jar:archimate/business-function
+sprite $AbusinessInteraction jar:archimate/business-interaction
+sprite $AbusinessInterface jar:archimate/business-interface
+sprite $AbusinessObject jar:archimate/business-object
+sprite $AbusinessProcess jar:archimate/business-process
+sprite $AbusinessRole jar:archimate/business-role
+sprite $AbusinessService jar:archimate/business-service
+sprite $Aconstraint jar:archimate/constraint
+sprite $Adevice jar:archimate/device
+sprite $Adriver jar:archimate/driver
+sprite $Agoal jar:archimate/goal
+sprite $AimplementationEvent jar:archimate/implementation-event
+sprite $Alocation jar:archimate/location
+sprite $Anode jar:archimate/node
+sprite $Aplateau jar:archimate/plateau
+sprite $Aproduct jar:archimate/product
+sprite $Arepresentation jar:archimate/representation
+sprite $Asystemdoftware jar:archimate/system-software
+sprite $Avalue jar:archimate/value
+
+
+card "hi" as hi1 <<$bProcess>><<behaviorCard>> #Application
+card "hi" as hi2 <<$aService>><<behaviorCard>> #Application
+card "hi" as hi3 <<$aComponent>><<behaviorCard>> #Application
+card "hi" as hi4 <<$AapplicationComponent>><<behaviorCard>> #Application
+card "hi" as hi5 <<$AapplicationEvent>><<behaviorCard>> #Application
+card "hi" as hi6 <<$AapplicationFunction>><<behaviorCard>> #Application
+card "hi" as hi7 <<$AapplicationInteraction>><<behaviorCard>> #Application
+card "hi" as hi8 <<$AapplicationInterface>><<behaviorCard>> #Application
+card "hi" as hi9 <<$AapplicationProcess>><<behaviorCard>> #Application
+card "hi" as hi10 <<$AapplicationService>><<behaviorCard>> #Application
+card "hi" as hi11 <<$AbusinessActor>><<behaviorCard>> #Application
+card "hi" as hi12 <<$AbusinessCollaboration>><<behaviorCard>> #Application
+card "hi" as hi13 <<$AbusinessEvent>><<behaviorCard>> #Application
+card "hi" as hi14 <<$AbusinessFunction>><<behaviorCard>> #Application
+card "hi" as hi15 <<$AbusinessInteraction>><<behaviorCard>> #Application
+card "hi" as hi16 <<$AbusinessInterface>><<behaviorCard>> #Application
+card "hi" as hi17 <<$AbusinessObject>><<behaviorCard>> #Application
+card "hi" as hi18 <<$AbusinessProcess>><<behaviorCard>> #Application
+card "hi" as hi19 <<$AbusinessRole>><<behaviorCard>> #Application
+card "hi" as hi20 <<$AbusinessService>><<behaviorCard>> #Application
+card "hi" as hi21 <<$Aconstraint>><<behaviorCard>> #Application
+card "hi" as hi22 <<$Adevice>><<behaviorCard>> #Application
+card "hi" as hi23 <<$Adriver>><<behaviorCard>> #Application
+card "hi" as hi24 <<$Agoal>><<behaviorCard>> #Application
+card "hi" as hi25 <<$AimplementationEvent>><<behaviorCard>> #Application
+card "hi" as hi26 <<$Alocation>><<behaviorCard>> #Application
+card "hi" as hi27 <<$Anode>><<behaviorCard>> #Application
+card "hi" as hi28 <<$Aplateau>><<behaviorCard>> #Application
+card "hi" as hi29 <<$Aproduct>><<behaviorCard>> #Application
+card "hi" as hi30 <<$Arepresentation>><<behaviorCard>> #Application
+card "hi" as hi31 <<$Asystemdoftware>><<behaviorCard>> #Application
+card "hi" as hi32 <<$Avalue>><<behaviorCard>> #Application
+
+@enduml
