@@ -1,135 +1,144 @@
-' card, component를 활용
 @startuml
-usecase USECASE
-agent AGENT
-card CARD
-
-
-' point: agent로는 group을 할 수 없다. 
-' point: component 보다는 car로 group을 하는게 더 보기 좋음
-card CARD.1{
-' component C.1{
-  card Component1 [
-  <**Component1**>
-  Render
-  </**Component1**>
-  ]
-  card Component2 [
-  <Component2>
-  State
-  Render
-  </Component2>
-  ]
-  card useHook [
-  <useHook>
-  State
-  </useHook>
-  ]
-  ' piont: 이름을 적지 않았을때 
-  card comp4 [
-    ?
-  ]
+skinparam rectangle<<behavior>> {
+  roundCorner 25
+}
+skinparam card<<behaviorCard>> {
+  roundCorner 25
 }
 
-' point: .을 사용해도 됨
-card CARD.2{
-  component ModelDomainLogic [
-    Model
-    -Domain logic
-  ]
+sprite $bProcess jar:archimate/business-process
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+sprite $AapplicationComponent jar:archimate/application-component
+sprite $AapplicationEvent jar:archimate/application-event
+sprite $AapplicationFunction jar:archimate/application-function
+sprite $AapplicationInteraction jar:archimate/application-interaction
+sprite $AapplicationInterface jar:archimate/application-interface
+sprite $AapplicationProcess jar:archimate/application-process
+sprite $AapplicationService jar:archimate/application-service
+sprite $AbusinessActor jar:archimate/business-actor
+sprite $AbusinessCollaboration jar:archimate/business-collaboration
+sprite $AbusinessEvent jar:archimate/business-event
+sprite $AbusinessFunction jar:archimate/business-function
+sprite $AbusinessInteraction jar:archimate/business-interaction
+sprite $AbusinessInterface jar:archimate/business-interface
+sprite $AbusinessObject jar:archimate/business-object
+sprite $AbusinessProcess jar:archimate/business-process
+sprite $AbusinessRole jar:archimate/business-role
+sprite $AbusinessService jar:archimate/business-service
+sprite $Aconstraint jar:archimate/constraint
+sprite $Adevice jar:archimate/device
+sprite $Adriver jar:archimate/driver
+sprite $Agoal jar:archimate/goal
+sprite $AimplementationEvent jar:archimate/implementation-event
+sprite $Alocation jar:archimate/location
+sprite $Anode jar:archimate/node
+sprite $Aplateau jar:archimate/plateau
+sprite $Aproduct jar:archimate/product
+sprite $Arepresentation jar:archimate/representation
+sprite $Asystemdoftware jar:archimate/system-software
+sprite $Avalue jar:archimate/value
 
-  ' point: component에 이름을 주지 않음
-  component {
-    component ViewModel[
-      ViewModel
-    ]
-    component VModel[
-      VModel
-    ]
-  }
+' sprite $Aartifact jar:archimate/artifact
+' sprite $AcommunicationNetwork jar:archimate/communication-network
+' sprite $AdistributionNetwork jar:archimate/distribution-network
+' sprite $Agrouping jar:archimate/grouping
+' sprite $AimplementationProcess jar:archimate/implementation-process
+' sprite $Amaterial jar:archimate/material
+' sprite $Apath jar:archimate/path
+' sprite $Aresource jar:archimate/resource
+' sprite $Astakeholder jar:archimate/stakeholder
 
-  component ModelLogic [
-    Model
-    -logic
-  ]
-  component Fetcher [
-    Network
-  ] 
-}
-
-card CARD.3{
-  component Fetcher [
-    **Fetcher**
-    Network
-  ]
-}
-
-
-card card4 {
-  () "Continaer component" as info1
-  () "Presentational component" as info2
-  () "React hook" as info3
-  () "Domain object" as info4
-  () "Infrastructure" as info5
+card {
+  rectangle "Render" as Component1 <<$aComponent>><<behavior>> #ff6644
+  rectangle "State\nRender" as Component2 <<$aComponent>><<behavior>> #ff6644
+  rectangle "State" as useHook <<useHook>> #ff6644
 }
 
 [Component1] <- [Component2]
-[Component1] -> [ModelDomainLogic]
 [Component2] -> [useHook]
-[Component2] -> [ViewModel]
+
+card Container_Component{
+  rectangle "**Model** \n Domain login" as ModelDomainLogic <<$bProcess>><<behavior>> #Business
+  card Model{
+    rectangle "**ViewModel**" as ViewModel <<$bProcess>><<behavior>> #Business
+    rectangle "**VModel**" as VModel <<$bProcess>><<behavior>> #Business
+  }
+  rectangle "**Model** \n logic" as ModelLogic <<$bProcess>><<behavior>> #Business
+}
+
+[Component1] -down-> [ModelDomainLogic]
+[Component2] -down-> [ViewModel]
 [useHook] -down-> [ModelLogic]
+
+card Infrastructure {
+  card {
+    card "Adaptor \n 3rd party" as Adaptor <<$aService>><<behaviorCard>> #Application
+    card "Fetcher \n Network" as Fetcher <<$aService>><<behaviorCard>> #Application
+  }
+  card {
+    card "**Query**" as Query1 <<$aService>><<behaviorCard>> #Application
+    card "Reqeust" as Reqeust <<$aService>><<behaviorCard>> #Application
+    card "Query" as Query2 <<$aService>><<behaviorCard>> #Application
+  }
+}
+[Adaptor] -up-> [VModel]
 [useHook] -down-> [Fetcher]
-
-[ModelDomainLogic]->[ViewModel]
-' point: 화살표 붙이지 않음
-[ViewModel] -down- [VModel]
-' point: 동그라미에 label
-' piont: ":" 뒤에 문구로 화살표 라인위에 comment 작성 가증
-[Fetcher] -> api :api 호출하는 기야~!
+[Adaptor] <- [Fetcher]
 
 
+[Fetcher] -down-> [/api]
 
-' setting skinparam
-'point: width를 설정 할 수 있음
-scale 800 width
 
-'point: skinparam
-' skinparam backgroundColor #AAFFFF
-skinparam card {
-}
-skinparam component {
-  FontSize 13
-  ' BorderColor<<ModelDomainLogic>> #FF6655
-  ' BackgroundColor<<ModelDomainLogic>> Red
-  ' FontName Courier
-  ' BorderColor black
-  ' BackgroundColor gold
-  ' ArrowFontName Impact
-  ' ArrowColor #FF6655
-  ' ArrowFontColor #777777
-}
-' skinparam component {
-'   backgroundcolor YellowGreen
-'   bordercolor red
-'   ' Padding 300
-'   ' Margin 200
-'   ' nodesep 100
-'   ' ranksep 100
-' }
-skinparam {
-  ' nodesep 30
-  ' ranksep 100
-  ' rankdir TD
-  ' align center
-}
-' skinparam 설명
-'   - nodesep: 요소 사이의 수평 간격을 설정합니다. 기본값은 40입니다.
-'   - ranksep: 요소 사이의 수직 간격을 설정합니다. 기본값은 50입니다.
+card "hi" as hi1 <<$bProcess>><<behaviorCard>> #Application
+card "hi" as hi2 <<$aService>><<behaviorCard>> #Application
+card "hi" as hi3 <<$aComponent>><<behaviorCard>> #Application
+card "hi" as hi4 <<$AapplicationComponent>><<behaviorCard>> #Application
+card "hi" as hi5 <<$AapplicationEvent>><<behaviorCard>> #Application
+card "hi" as hi6 <<$AapplicationFunction>><<behaviorCard>> #Application
+card "hi" as hi7 <<$AapplicationInteraction>><<behaviorCard>> #Application
+card "hi" as hi8 <<$AapplicationInterface>><<behaviorCard>> #Application
+card "hi" as hi9 <<$AapplicationProcess>><<behaviorCard>> #Application
+card "hi" as hi10 <<$AapplicationService>><<behaviorCard>> #Application
+card "hi" as hi11 <<$AbusinessActor>><<behaviorCard>> #Application
+card "hi" as hi12 <<$AbusinessCollaboration>><<behaviorCard>> #Application
+card "hi" as hi13 <<$AbusinessEvent>><<behaviorCard>> #Application
+card "hi" as hi14 <<$AbusinessFunction>><<behaviorCard>> #Application
+card "hi" as hi15 <<$AbusinessInteraction>><<behaviorCard>> #Application
+card "hi" as hi16 <<$AbusinessInterface>><<behaviorCard>> #Application
+card "hi" as hi17 <<$AbusinessObject>><<behaviorCard>> #Application
+card "hi" as hi18 <<$AbusinessProcess>><<behaviorCard>> #Application
+card "hi" as hi19 <<$AbusinessRole>><<behaviorCard>> #Application
+card "hi" as hi20 <<$AbusinessService>><<behaviorCard>> #Application
+card "hi" as hi21 <<$Aconstraint>><<behaviorCard>> #Application
+card "hi" as hi22 <<$Adevice>><<behaviorCard>> #Application
+card "hi" as hi23 <<$Adriver>><<behaviorCard>> #Application
+card "hi" as hi24 <<$Agoal>><<behaviorCard>> #Application
+card "hi" as hi25 <<$AimplementationEvent>><<behaviorCard>> #Application
+card "hi" as hi26 <<$Alocation>><<behaviorCard>> #Application
+card "hi" as hi27 <<$Anode>><<behaviorCard>> #Application
+card "hi" as hi28 <<$Aplateau>><<behaviorCard>> #Application
+card "hi" as hi29 <<$Aproduct>><<behaviorCard>> #Application
+card "hi" as hi30 <<$Arepresentation>><<behaviorCard>> #Application
+card "hi" as hi31 <<$Asystemdoftware>><<behaviorCard>> #Application
+card "hi" as hi32 <<$Avalue>><<behaviorCard>> #Application
 
+' 제일 하단 설명
+legend left
+Example from the "Archisurance case study" (OpenGroup).
+See
+====
+<$bProcess> : Domain object
+====
+<$aService> : Infrastructure
+====
+<$aComponent> : Container component
+====
+<$aComponent> : Presentational component
+====
+useHook : React hook
+endlegend
 @enduml
 
-
-
-' 대각선 화살표 
-' 요소 위치
-' DEPLOYMENT에 elemets가 정리 되어 있음
+' element의 아이콘 두개 이외 다른것 잇나 확인하기 
+' $bProcess, $aService
