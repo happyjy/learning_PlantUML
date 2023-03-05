@@ -1,0 +1,31 @@
+' PlantUML 언어참조가이드 (1.2021.2) 128 / 407
+' 7.14 Specific SkinParameter 7 컴포넌트다이어그램
+
+@startuml
+[AA] <<static lib>>
+[BB] <<shared lib>>
+[CC] <<static lib>>
+
+component DD[
+  dd
+]
+
+node node1
+node node2 <<shared node>>
+database Production
+
+skinparam component {
+  backgroundColor<<static lib>> DarkKhaki
+  backgroundColor<<shared lib>> Green
+  backgroundColor<<DDD>> Green
+  backgroundColor<<DD>> red
+  backgroundColor<<ddD>> blue
+}
+
+skinparam node {
+  borderColor Green
+  backgroundColor Yellow
+  backgroundColor<<shared node>> Magenta
+}
+skinparam databaseBackgroundColor Aqua
+@enduml
