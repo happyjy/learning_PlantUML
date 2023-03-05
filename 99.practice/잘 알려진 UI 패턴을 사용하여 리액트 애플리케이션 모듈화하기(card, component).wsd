@@ -9,11 +9,11 @@ card CARD
 ' point: component 보다는 car로 group을 하는게 더 보기 좋음
 card CARD.1{
 ' component C.1{
-  card Component1 [
+  card Component1 [ 
     <**Component1**>
     Render
-    </**Component1**>
-  ]
+    </**Component1**> 
+  ] 
   card Component2 [
     <Component2>
     State
