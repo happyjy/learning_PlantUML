@@ -1,0 +1,33 @@
+@startuml
+skinparam card {
+    backgroundcolor YellowGreen
+    bordercolor black
+}
+card A
+card B
+card C
+' A -> B
+' B -> C
+' A -- C
+' A -down-> C
+' B -up-> C
+' A -left-> B
+A -right-> C
+A -down-> B
+' A -up-> C
+' A -left-> C
+' A -right-> B
+' A -down-> A
+' A -up-> A
+' A -left-> A
+' A -right-> A
+
+skinparam {
+    nodesep 50
+    ranksep 50
+    rankdir TD
+    align center
+}
+' A -> B
+' B -> C
+@enduml
