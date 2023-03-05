@@ -1,0 +1,135 @@
+' card, component를 활용
+@startuml
+usecase USECASE
+agent AGENT
+card CARD
+
+
+' point: agent로는 group을 할 수 없다. 
+' point: component 보다는 car로 group을 하는게 더 보기 좋음
+card CARD.1{
+' component C.1{
+  card Component1 [
+    <**Component1**>
+    Render
+    </**Component1**>
+  ]
+  card Component2 [
+    <Component2>
+    State
+    Render
+    </Component2>
+  ]
+  card useHook [
+    <useHook>
+    State
+    </useHook>
+  ]
+  ' piont: 이름을 적지 않았을때 
+  card comp4 [
+    ?
+  ]
+}
+
+' point: .을 사용해도 됨
+card CARD.2{
+  component ModelDomainLogic [
+    Model
+    -Domain logic
+  ]
+
+  ' point: component에 이름을 주지 않음
+  component {
+    component ViewModel[
+      ViewModel
+    ]
+    component VModel[
+      VModel
+    ]
+  }
+
+  component ModelLogic [
+    Model
+    -logic
+  ]
+  component Fetcher [
+    Network
+  ] 
+}
+
+card CARD.3{
+  component Fetcher [
+    **Fetcher**
+    Network
+  ]
+}
+
+
+card card4 {
+  () "Continaer component" as info1
+  () "Presentational component" as info2
+  () "React hook" as info3
+  () "Domain object" as info4
+  () "Infrastructure" as info5
+}
+
+[Component1] <- [Component2]
+[Component1] -> [ModelDomainLogic]
+[Component2] -> [useHook]
+[Component2] -> [ViewModel]
+[useHook] -down-> [ModelLogic]
+[useHook] -down-> [Fetcher]
+
+[ModelDomainLogic]->[ViewModel]
+' point: 화살표 붙이지 않음
+[ViewModel] -down- [VModel]
+' point: 동그라미에 label
+' piont: ":" 뒤에 문구로 화살표 라인위에 comment 작성 가증
+[Fetcher] -> api :api 호출하는 기야~!
+
+
+
+' setting skinparam
+'point: width를 설정 할 수 있음
+scale 800 width
+
+'point: skinparam
+' skinparam backgroundColor #AAFFFF
+skinparam card {
+}
+skinparam component {
+  FontSize 13
+  ' BorderColor<<ModelDomainLogic>> #FF6655
+  ' BackgroundColor<<ModelDomainLogic>> Red
+  ' FontName Courier
+  ' BorderColor black
+  ' BackgroundColor gold
+  ' ArrowFontName Impact
+  ' ArrowColor #FF6655
+  ' ArrowFontColor #777777
+}
+' skinparam component {
+'   backgroundcolor YellowGreen
+'   bordercolor red
+'   ' Padding 300
+'   ' Margin 200
+'   ' nodesep 100
+'   ' ranksep 100
+' }
+skinparam {
+  ' nodesep 30
+  ' ranksep 100
+  ' rankdir TD
+  ' align center
+}
+' skinparam 설명
+'   - nodesep: 요소 사이의 수평 간격을 설정합니다. 기본값은 40입니다.
+'   - ranksep: 요소 사이의 수직 간격을 설정합니다. 기본값은 50입니다.
+
+@enduml
+
+
+
+' 대각선 화살표 
+' 요소 위치
+' DEPLOYMENT에 elemets가 정리 되어 있음
