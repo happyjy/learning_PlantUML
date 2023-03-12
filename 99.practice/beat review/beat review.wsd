@@ -1,0 +1,112 @@
+@startuml
+skinparam rectangle<<behavior>> {
+  roundCorner 25
+}
+skinparam card<<behaviorCard>> {
+  roundCorner 25
+}
+
+sprite $bProcess jar:archimate/business-process
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+
+' card {
+'   rectangle "Render" as Component1 <<$aComponent>><<behavior>> #ff6644
+'   rectangle "State\nRender" as Component2 <<$aComponent>><<behavior>> #ff6644
+'   rectangle "State" as useHook <<useHook>> #ff6644
+' }
+
+' [Component1] <- [Component2]
+' [Component2] -> [useHook]
+
+card BeatReviewFragmentContainer {
+  card BeatReviewFragment {
+    ' rectangle "**Model** \n Domain login" as ModelDomainLogic <<$bProcess>><<behavior>> #Business
+    card TenSecStripDetailContainer {
+      card TenSecStripDetail {
+        card TenSecStripDetailHeaderContainer {
+          card TenSecStripDetailHeader {
+
+          }
+        }
+        card TenSecStripDetailChartContainer {
+          card ShortTermChart {
+            rectangle "**HighchartsReact**" as HighchartsReact <<$bProcess>><<behavior>> #Business
+          }
+        }
+      }
+    }
+  }
+}
+
+
+card BeatReviewFragment {
+  card BeatReviewSidePanel {
+    card BeatSelectNavigationContainer {
+      rectangle "**onChangeSelectionHandler**" as onChangeSelectionHandler <<$bProcess>><<behavior>> #Business      
+
+      card EventSelectNavigation {
+        card EventSelector {
+          card EventSelectorForBeatReview {
+
+          }
+          card EventSelectorForEventReview {
+            card 1.SelectListWrapper { 
+
+            }
+            card 2.MovePositionWrapper {
+              rectangle "**onChangeSelectionHandler**" as _onChangeSelectionHandler <<$bProcess>><<behavior>> #Business
+            }
+            card 3.EntireInfoWrapper { 
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
+[onChangeSelectionHandler] -> [_onChangeSelectionHandler]
+
+' [Component1] -down-> [ModelDomainLogic]
+' [Component2] -down-> [ViewModel]
+' [useHook] -down-> [ModelLogic]
+
+' card Infrastructure {
+'   card {
+'     card "Adaptor \n 3rd party" as Adaptor <<$aService>><<behaviorCard>> #Application
+'     card "Fetcher \n Network" as Fetcher <<$aService>><<behaviorCard>> #Application
+'   }
+'   card {
+'     card "**Query**" as Query1 <<$aService>><<behaviorCard>> #Application
+'     card "Reqeust" as Reqeust <<$aService>><<behaviorCard>> #Application
+'     card "Query" as Query2 <<$aService>><<behaviorCard>> #Application
+'   }
+' }
+' [Adaptor] -up-> [VModel]
+' [useHook] -down-> [Fetcher]
+' [Adaptor] <- [Fetcher]
+
+
+' [Fetcher] -down-> [/api]
+
+
+' 제일 하단 설명
+legend left
+Example from the "Archisurance case study" (OpenGroup).
+See
+====
+<$bProcess> : Domain object
+====
+<$aService> : Infrastructure
+====
+<$aComponent> : Container component
+====
+<$aComponent> : Presentational component
+====
+useHook : React hook
+endlegend
+@enduml
+
+' element의 아이콘 두개 이외 다른것 잇나 확인하기 
+' $bProcess, $aService
