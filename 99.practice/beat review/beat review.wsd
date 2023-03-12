@@ -43,6 +43,8 @@ card BeatReviewFragmentContainer {
 card BeatReviewFragment {
   card BeatReviewSidePanel {
     card BeatSelectNavigationContainer {
+      rectangle "**setSidePanelSelectedValueList**" as _setSelectedValueListHandler <<$aComponent>><<behavior>> #Business      
+      rectangle "**getRegisteredReportDataRequest**" as _updateRegisteredReportData <<$aComponent>><<behavior>> #Business      
       rectangle "**onChangeSelectionHandler**" as onChangeSelectionHandler <<$bProcess>><<behavior>> #Business      
 
       card EventSelectNavigation {
@@ -68,27 +70,32 @@ card BeatReviewFragment {
 }
 [onChangeSelectionHandler] -> [_onChangeSelectionHandler]
 
-' [Component1] -down-> [ModelDomainLogic]
-' [Component2] -down-> [ViewModel]
-' [useHook] -down-> [ModelLogic]
-
-' card Infrastructure {
-'   card {
-'     card "Adaptor \n 3rd party" as Adaptor <<$aService>><<behaviorCard>> #Application
-'     card "Fetcher \n Network" as Fetcher <<$aService>><<behaviorCard>> #Application
-'   }
-'   card {
-'     card "**Query**" as Query1 <<$aService>><<behaviorCard>> #Application
-'     card "Reqeust" as Reqeust <<$aService>><<behaviorCard>> #Application
-'     card "Query" as Query2 <<$aService>><<behaviorCard>> #Application
-'   }
-' }
-' [Adaptor] -up-> [VModel]
-' [useHook] -down-> [Fetcher]
-' [Adaptor] <- [Fetcher]
 
 
-' [Fetcher] -down-> [/api]
+card beatReviewDuck {
+  ' setSidePanelSelectedValueList
+  rectangle "sagafn_setSelectedValueListHandler" as sagafn_setSelectedValueListHandler <<$aComponent>><<behaviorCard>> #Business      
+  ' getRegisteredReportDataRequest
+  rectangle "sagafn_updateRegisteredReportData"  as sagafn_updateRegisteredReportData <<$aComponent>><<behaviorCard>> #Business      
+  ' getEventDetailRequested
+  rectangle "sagafn_getEventDetail" as sagafn_getEventDetail <<$aComponent>><<behaviorCard>> #Business      
+
+  rectangle "sagafnfetchAllDataPooling" as sagafnfetchAllDataPooling <<$aComponent>><<behaviorCard>> #Business      
+  rectangle "sagafnfetchDataPooling" as sagafnfetchDataPooling <<$aComponent>><<behaviorCard>> #Business      
+  rectangle "sagafnfetchDataPooling" as sagafnfetchDataPooling <<$aComponent>><<behaviorCard>> #Business      
+  rectangle "sagafn_setSelectedDivIndex" as sagafn_setSelectedDivIndex <<$aComponent>><<behaviorCard>> #Business      
+}
+[_setSelectedValueListHandler] <-down- [sagafn_setSelectedValueListHandler]
+[_updateRegisteredReportData] <-down- [sagafn_updateRegisteredReportData]
+
+' 🍎 saga function > _updateRegisteredReportData: 
+' BeatSelectNavigationContainer.js:206 batch trigger
+' 🍎 saga function > _setSelectedValueListHandler: 
+' 🍎 saga function > _getEventDetail: 
+' 🍎 saga function > fetchAllDataPooling: 
+' 🍎 saga function > fetchDataPooling: 
+' 🍎 saga function > fetchDataPooling: 
+' 🍎 saga function > _setSelectedDivIndex: 
 
 
 ' 제일 하단 설명
