@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+class User {
+    id : INTEGER
+    ..
+    other_id : INTEGER
+}
+
+class Email {
+    id : variable
+    ..
+    user_id : React.Component
+    address : Function
+}
+
+User::id *-- Email::user_id
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+object London
+object Washington
+object Berlin
+object NewYork {
+    a
+    b
+    c
+}
+
+map CapitalCity {
+    UK *-> London
+    USA *--> Washington
+    Germany *---> Berlin
+}
+object CapitalCity1 {
+    1 => UUK
+    2 => UUSA
+    3 => UUSA
+}
+
+NewYork --> CapitalCity::USA
+NewYork::a ---> CapitalCity::UK
+NewYork::b ---> CapitalCity::USA
+NewYork::c -----> CapitalCity::Germany
+
+CapitalCity::USA -down----> CapitalCity1::UUSA
+@enduml

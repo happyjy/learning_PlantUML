@@ -1,0 +1,22 @@
+
+'#point -[hidden]->
+'#point state group & color
+@startuml
+state CurrentSite #pink {
+    state HardwareSetup #lightblue {
+        state Site #brown
+        Site -left[hidden]-> Controller
+        Controller -down[hidden]-> Devices
+}
+
+state PresentationSetup{
+    Groups -left[hidden]-> PlansAndGraphics
+}
+
+state Trends #FFFF77 {
+    ' rectangle "HighchartsReact"
+}
+state Schedule #magenta
+state AlarmSupression
+}
+@enduml

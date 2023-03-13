@@ -1,0 +1,16 @@
+@startuml
+!define MyComponent <<Component>> 
+
+MyComponent("Component 1") { 
+  skinparam backgroundColor 
+}
+
+MyComponent("Component 2") { 
+  skinparam borderWidth 2 
+  skinparam borderColor blue 
+}
+
+MyComponent("Component 3") { 
+  skinparam stereotypeFontColor red 
+}
+@enduml

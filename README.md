@@ -6,6 +6,7 @@ PlantUML을 익히는 repository 입니다.
 
 - https://plantuml.com/ko/
 - https://github.com/qjebbs/vscode-plantuml
+- pdf: https://plantuml.com/ko/guide
 
 # short cut
 

@@ -19,10 +19,15 @@ sprite $aComponent jar:archimate/application-component
 ' [Component1] <- [Component2]
 ' [Component2] -> [useHook]
 
+
+
 card BeatReviewFragmentContainer {
   card BeatReviewFragment {
-    ' rectangle "**Model** \n Domain login" as ModelDomainLogic <<$bProcess>><<behavior>> #Business
-    card TenSecStripDetailContainer {
+  }
+}
+
+card BeatReviewFragment {
+    card TenSecStripDetailContainer #pink{
       card TenSecStripDetail {
         card TenSecStripDetailHeaderContainer {
           card TenSecStripDetailHeader {
@@ -37,38 +42,41 @@ card BeatReviewFragmentContainer {
       }
     }
   }
-}
 
 
 card BeatReviewFragment {
-  card BeatReviewSidePanel {
+  card BeatReviewSidePanel #pink{
     card BeatSelectNavigationContainer {
       rectangle "**setSidePanelSelectedValueList**" as _setSelectedValueListHandler <<$aComponent>><<behavior>> #Business      
       rectangle "**getRegisteredReportDataRequest**" as _updateRegisteredReportData <<$aComponent>><<behavior>> #Business      
-      rectangle "**onChangeSelectionHandler**" as onChangeSelectionHandler <<$bProcess>><<behavior>> #Business      
-
-      card EventSelectNavigation {
+      rectangle "**onChangeSelectionHandler**" as onChangeSelectionHandler <<$bProcess>><<behavior>> #Business
+      
+      card EventSelectNavigation #LightBlue {
+        rectangle "render BeatsFragmentContainer" as _render_BeatsFragmentContainer
         card EventSelector {
-          card EventSelectorForBeatReview {
-
-          }
           card EventSelectorForEventReview {
+            
+          }
+          card EventSelectorForBeatReview #LightCyan {
             card 1.SelectListWrapper { 
-
+              
             }
             card 2.MovePositionWrapper {
               rectangle "**onChangeSelectionHandler**" as _onChangeSelectionHandler <<$bProcess>><<behavior>> #Business
             }
-            card 3.EntireInfoWrapper { 
-
+            card 3.EntireInfoWrapper {
             }
           }
         }
+      }
+      card BeatsFragmentContainer {
+        rectangle "children component" as _BeatsFragmentContainer
       }
     }
   }
 }
 [onChangeSelectionHandler] -> [_onChangeSelectionHandler]
+[_BeatsFragmentContainer] -left-> [_render_BeatsFragmentContainer]
 
 
 
@@ -85,8 +93,8 @@ card beatReviewDuck {
   rectangle "sagafnfetchDataPooling" as sagafnfetchDataPooling <<$aComponent>><<behaviorCard>> #Business      
   rectangle "sagafn_setSelectedDivIndex" as sagafn_setSelectedDivIndex <<$aComponent>><<behaviorCard>> #Business      
 }
-[_setSelectedValueListHandler] <-down- [sagafn_setSelectedValueListHandler]
-[_updateRegisteredReportData] <-down- [sagafn_updateRegisteredReportData]
+[sagafn_setSelectedValueListHandler] -up-> [_setSelectedValueListHandler] 
+[sagafn_updateRegisteredReportData] -up-> [_updateRegisteredReportData] 
 
 ' 🍎 saga function > _updateRegisteredReportData: 
 ' BeatSelectNavigationContainer.js:206 batch trigger
