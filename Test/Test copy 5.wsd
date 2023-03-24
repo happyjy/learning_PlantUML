@@ -1,0 +1,11 @@
+@startuml
+card "Card Group" {
+    card "First Card" as card1
+    card "Second Card" as card2
+    card "Third Card" as card3
+}
+
+card1 order 1
+card2 order 2
+card3 order 3
+@enduml
