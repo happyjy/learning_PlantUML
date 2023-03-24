@@ -1,0 +1,35 @@
+@startuml
+box "Redux-saga" #LightBlue
+participant Fn1
+participant Fn2
+participant Fn3
+participant Server
+
+' activate Fn1 #FFBBBB
+Fn1 ->> Fn2: fork
+Fn2 ->> Fn3: whlie(fork)
+Fn3 ->> Server: call
+activate Server #DarkSalmon
+
+Server -> Fn3: response
+deactivate Server
+
+end box
+
+box "state"
+' create control redux
+create redux
+Fn3 -> redux : set State
+note right : set pooling data!
+
+redux -> Fn3
+Fn3 -> Fn2
+Fn2 -> Fn1
+
+
+Fn1 ->> Fn1: hi
+' deactivate Fn1
+return bye
+end box
+
+@enduml
