@@ -2,11 +2,18 @@
 
 PlantUML을 익히는 repository 입니다.
 
+# 폴더 구성 설명
+
+- plantuml에서 제공하는 공식문서 pdf의 순번을 채용 했습니다.
+  - plantuml 공식문서 pdf: https://plantuml.com/ko/guide
+
 # 공식 문서
 
 - https://plantuml.com/ko/
+  - 다이어 그램 종류 별로 예제와 작성 옵션들이 설명 되어 있다.
+  - pdf: https://plantuml.com/ko/guide
 - https://github.com/qjebbs/vscode-plantuml
-- pdf: https://plantuml.com/ko/guide
+  - vscode에서 plantuml 과련 옵션들이 설명 되어 있다.
 
 # short cut
 
