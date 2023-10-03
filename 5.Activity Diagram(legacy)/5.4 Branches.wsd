@@ -1,5 +1,4 @@
 ' You can use if/then/else keywords to define branches.
-
 @startuml
 (*) --> "Initialization"
 if "Some Test" then

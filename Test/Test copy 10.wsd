@@ -1,0 +1,20 @@
+@startuml
+skinparam rectangle {
+  BorderColor black
+  BorderThickness 1
+  backgroundColor white
+}
+
+rectangle "Main Rectangle" {
+  rectangle "Sub Rectangle 1" {
+    note "This is a note for Sub Rectangle 1" {
+      This is the note contents
+    }
+  }
+  rectangle "Sub Rectangle 2" {
+    note right: "This is a note for Sub Rectangle 2"
+  }
+  note bottom: "This is a note for Main Rectangle"
+}
+
+@enduml

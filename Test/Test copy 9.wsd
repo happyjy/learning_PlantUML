@@ -1,0 +1,18 @@
+@startuml
+skinparam node {
+    BorderColor black
+    BorderThickness 1
+}
+
+node "5" {
+    node "3" {
+        node "2"
+        note right: This is node 4.
+    }
+    note right: This is node 7.
+    node "7" {
+        node "6"
+        note right: This is node 8.
+    }
+}
+@enduml

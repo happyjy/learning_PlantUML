@@ -1,0 +1,18 @@
+' @startuml
+' if (condition?) then
+' :error;
+' stop
+' endif
+' #palegreen:action;
+' @enduml
+
+
+'But if you want to stop at the precise action, you can use the kill or detach keyword:
+'• kill
+@startuml
+if (condition?) then
+#pink:error;
+kill
+endif
+#palegreen:action;
+@enduml
