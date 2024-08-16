@@ -1,0 +1,213 @@
+@startuml
+
+class OptimisticEventDataUpdate {
+    +static basisBpm: number
+    +validateOverHrLimit(updateTargetWaveformIndex: WaveformIndex, comparisonWaveformIndexList: WaveformIndex[]): boolean
+    +validateSBeatInAf(afList: TimeEvent[], waveformIndex: WaveformIndex, recordingStartMs: Ms): boolean
+    +getAfList(): Generator
+    +getRecordingStartMs(): Generator
+    +getSelectionStrip(): Generator
+}
+
+' ------------------------------------------------------------------------------------------------
+' ------------------------------------------------------------------------------------------------
+' ------------------------------------------------------------------------------------------------
+
+class EventReviewOptimisticEventDataUpdateForBeatEvent {
+    -rfdcClone: any
+    +constructor()
+    +mergeBeatsNEctopicList(filterBeatsNEctopicList: BeatsNBeatEvents[]): OptimisticEventDataUpdateForBeats
+    +setOptimisticEventDataUpdateResult(isValidationSuccessful: boolean, result: OptimisticEventDataUpdateForBeats): isValidationSuccessful: boolean, result: OptimisticEventDataUpdateForBeats
+}
+class PostBeat {
+    -result: any
+    -reqParam: any
+    +constructor(reqParam: any)
+    +*optimisticEventDataUpdate(updateReqOption: UpdateReqOptionProps): Generator
+    +updateLogic(reqBody: ReqBody, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): OptimisticEventDataUpdateForBeats
+    +*validateExecution(updateReqOption: UpdateReqOption, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): Generator | boolean
+    +*_validation(reqBody: ReqBody, updateReqOption: UpdateReqOption, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): Generator
+    +getResult(): any
+}
+class PatchBeat {
+    -result: any
+    -reqParam: any
+    +validation(reqBody: , updateReqOption: any, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats, copyMergedBeatsNEctopicList: any): OptimisticEventDataUpdateForBeats
+}
+class DeleteBeat {
+    -result: any
+    -reqParam: any
+    +constructor(reqParam: any)
+    +optimisticEventDataUpdate(updateReqOption: UpdateReqOptionProps): void
+    +updateLogic(reqBody: ReqBody, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): OptimisticEventDataUpdateForBeats
+    +_validation(): void
+    +getResult(): any
+}
+OptimisticEventDataUpdate <|-up- EventReviewOptimisticEventDataUpdateForBeatEvent
+EventReviewOptimisticEventDataUpdateForBeatEvent <|-up- PostBeat
+EventReviewOptimisticEventDataUpdateForBeatEvent <|-up- PatchBeat
+EventReviewOptimisticEventDataUpdateForBeatEvent <|-up- DeleteBeat
+' ------------------------------------------------------------------------------------------------
+' ------------------------------------------------------------------------------------------------
+' ------------------------------------------------------------------------------------------------
+
+class EventReviewOptimisticEventDataUpdateForTimeEvent {
+    +validation(): void
+    +*setTimeEventsList(freshLeadOffList: TimeEvent[], freshTimeEventList: TimeEvent[]): Generator
+    +validatePauseInQ(staleTimeEvent: TimeEvent, recordingStartMs: Ms, selectedBeatsInfo: waveformIndexList: WaveformIndex[], beatTypeList: BeatType[]): boolean
+    +getBeatsNEctopicList(): Generator
+    +getTimeEventList(): Generator
+    +getSelectedEventList(): Generator
+    +getIsWholeUnMark(): Generator
+    +isFullyExclusiveRangeOfSelectionStrip(onsetSelectionStrip: number, terminationSelectionStrip: number, onsetRange: number, terminationRange: number): boolean
+    +isFullyInclusiveRangeOfSelectionStrip(onsetSelectionStrip: number, terminationSelectionStrip: number, onsetRange: number, terminationRange: number): boolean
+    +isExclusiveRangeOfSelectionStrip(onsetSelectionStrip: number, terminationSelectionStrip: number, onsetRange: number, terminationRange: number): boolean
+    +isInclusiveRangeOfSelectionStrip(onsetSelectionStrip: number, terminationSelectionStrip: number, onsetRange: number, terminationRange: number): boolean
+    +isPartiallyInclusiveRangeOfSelectionStrip(onsetSelectionStrip: number, terminationSelectionStrip: number, onsetRange: number, terminationRange: number, isIncludeBorder: boolean): boolean
+    +getRemainingRange(start: number, end: number, excludeList: any[]): [number, number][]
+    +findOverLappingEvent(baseSelectionStripTimeStamp: number, partiallyInclusiveRange: TimeEvent[]): TimeEvent
+    +sortTimeEventList(freshTimeEventList: TimeEvent[]): TimeEvent[]
+    +getAvailableEventRange(excludedEventList: any[], responseInfo: TimeEventForOptimisticUpdate[], eventType: optimisticEventDataUpdateForTimeEventConstTypes): TimeEventForOptimisticUpdate[]
+}
+class OptimisticEventDataUpdateForNormal {
+    -normalTypeEventList: TimeEventType[]
+    +validation(): void
+    +*optimisticEventData(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+    - *handleAddEvent(updateReqOption: EventHandlingParams): void
+    - *handleRemoveEvent(updateReqOption: EventHandlingParams): void
+}
+class OptimisticEventDataUpdateForPause {
+    +validation(): void
+    +*optimisticEventData(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+    - *handleAddEvent(updateReqOption: EventHandlingParams): void
+    - *handleDeleteEvent(updateReqOption: EventHandlingParams): void
+}
+class OptimisticEventDataUpdateForAVBlock {
+    +validation(): void
+    +*optimisticEventData(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+    - *handleAddEvent(updateReqOption: EventHandlingParams): void
+    - *handleDeleteEvent(updateReqOption: EventHandlingParams): void
+}
+package "eventReview_PostAfib" {
+    class PostAfib {
+        +result: any
+        +reqParam: any
+        +constructor(reqParam: any)
+        +*optimisticEventDataUpdate(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +*_validation(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +*updateLogic(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +getResult(): any
+    }
+    class PostAfibCommand {
+        +command: any
+        +executeInst: any
+        +PostAfibCommand(value: any)
+        +execute(): void
+        +getResult(): any
+    }
+    note right: PostAfibCommand에서 \nCommand, PostAfib Class를 사용
+}
+package "eventReview_PostOthers" {
+    class PostOthers {
+        +result: any
+        +reqParam: any
+        +constructor(reqParam: any)
+        +*optimisticEventDataUpdate(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +_validation(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +*updateLogic(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +getResult(): any
+    }
+    class PostOthersCommand {
+        +command: any
+        +executeInst: any
+        +PostOthersCommand(value: any)
+        +execute(): void
+        +getResult(): any
+    }
+}
+package "eventReview_PostPause" {
+    class PostPause {
+        +result: any
+        +reqParam: any
+        +constructor(reqParam: any)
+        +*optimisticEventDataUpdate(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +_validation(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +*updateLogic(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +getResult(): any
+    }
+    class PostPauseCommand {
+        +command: any
+        +executeInst: any
+        +PostPauseCommand(value: any)
+        +execute(): void
+        +getResult(): any
+    }
+    note left: PostPauseCommand에서 \nCommand, PostPause Class를 사용
+}
+package "eventReview_PostAVBlock" {
+    class PostAVBlock {
+        +result: any
+        +reqParam: any
+        +constructor(reqParam: any)
+        +*optimisticEventDataUpdate(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +_validation(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +*updateLogic(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+        +getResult(): any
+    }
+    class PostAVBlockCommand {
+        +command: any
+        +executeInst: any
+        +PostAVBlockCommand(value: any)
+        +execute(): void
+        +getResult(): any
+    }
+}
+    
+OptimisticEventDataUpdate <|-down- EventReviewOptimisticEventDataUpdateForTimeEvent
+EventReviewOptimisticEventDataUpdateForTimeEvent <|-- OptimisticEventDataUpdateForNormal
+EventReviewOptimisticEventDataUpdateForTimeEvent <|-- OptimisticEventDataUpdateForPause
+EventReviewOptimisticEventDataUpdateForTimeEvent <|-- OptimisticEventDataUpdateForAVBlock
+OptimisticEventDataUpdateForNormal <-- PostAfib: extends
+OptimisticEventDataUpdateForNormal <-- PostOthers: extends
+OptimisticEventDataUpdateForPause <-- PostPause: extends
+OptimisticEventDataUpdateForAVBlock <-- PostAVBlock: extends
+' ------------------------------------------------------------------------------------------------
+' ------------------------------------------------------------------------------------------------
+' ------------------------------------------------------------------------------------------------
+
+package "eventUpdateCmdPattern" {
+  class Command {
+    +executeClass: any
+    +undo: any
+    +value: any
+    +Command(executeClass: any, undo: any, value: any)
+  }
+  class EventUpdate {
+    +current: any
+    +commands: any[]
+    +action(command: any): void
+    +execute(command: any): void
+    -verifyOptimisticUpdate(command: any): void
+    -getWaveformIndexes(filterBeatsNEctopicList: any): void
+    -getMergeBeatsNEctopicList(filterBeatsNEctopicList: any): void
+    +undo(): void
+    +getCurrentValue(): void
+    +getResult(): void
+    }
+    note left: EventUpdate에서 \nCommand Class를 사용
+}
+EventUpdate -up-> Command : uses
+
+PostOthersCommand -down-> Command : uses
+PostOthersCommand -up-> PostOthers : uses
+
+PostAfibCommand -down-> Command : uses
+PostAfibCommand -up-> PostAfib : uses
+
+PostPauseCommand -down-> Command : uses
+PostPauseCommand -up-> PostPause : uses
+
+PostAVBlockCommand -down-> Command : uses
+PostAVBlockCommand -up-> PostAVBlock : uses
+
+@enduml

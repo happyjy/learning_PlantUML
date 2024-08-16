@@ -1,0 +1,47 @@
+@startuml
+
+package "optimisticUpdate/type" {
+  class optimisticEventDataUpdateForTimeEventParam {
+  }
+}
+
+package "eventUpdateCmdPattern" {
+  class Command {
+    +Command(clazz: Class<>, func: Function, value: any)
+    +executeClass: any
+    +value: any
+  }
+}
+
+package "optimisticEventDataUpdateForNormal" {
+  class OptimisticEventDataUpdateForNormal {
+    +optimisticEventData(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+    +validation(): void
+  }
+}
+
+class PostOthers {
+  +result: any
+  +reqParam: any
+  +PostOthers(reqParam: any)
+  +optimisticEventDataUpdate(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+  +_validation(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+  +updateLogic(updateReqOption: optimisticEventDataUpdateForTimeEventParam): void
+  +getResult(): any
+}
+
+PostOthers --> OptimisticEventDataUpdateForNormal : extends
+
+class PostOthersCommand {
+  +command: any
+  +executeInst: any
+  +PostOthersCommand(value: any)
+  +execute(): void
+  +getResult(): any
+}
+note left: PostOthersCommand에서 \nCommand, PostOthers Class를 사용
+
+PostOthersCommand --> Command : uses
+PostOthersCommand --> PostOthers : uses
+
+@enduml
