@@ -19,34 +19,94 @@ class EventReviewOptimisticEventDataUpdateForBeatEvent {
     +mergeBeatsNEctopicList(filterBeatsNEctopicList: BeatsNBeatEvents[]): OptimisticEventDataUpdateForBeats
     +setOptimisticEventDataUpdateResult(isValidationSuccessful: boolean, result: OptimisticEventDataUpdateForBeats): isValidationSuccessful: boolean, result: OptimisticEventDataUpdateForBeats
 }
-class PostBeat {
-    -result: any
-    -reqParam: any
-    +constructor(reqParam: any)
-    +*optimisticEventDataUpdate(updateReqOption: UpdateReqOptionProps): Generator
-    +updateLogic(reqBody: ReqBody, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): OptimisticEventDataUpdateForBeats
-    +*validateExecution(updateReqOption: UpdateReqOption, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): Generator | boolean
-    +*_validation(reqBody: ReqBody, updateReqOption: UpdateReqOption, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): Generator
-    +getResult(): any
+package "eventReview_PostBeat" {
+    class PostBeat {
+        -result: any
+        -reqParam: any
+        +constructor(reqParam: any)
+        +*optimisticEventDataUpdate(updateReqOption: UpdateReqOptionProps): Generator
+        +updateLogic(reqBody: ReqBody, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): OptimisticEventDataUpdateForBeats
+        +*validateExecution(updateReqOption: UpdateReqOption, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): Generator | boolean
+        +*_validation(reqBody: ReqBody, updateReqOption: UpdateReqOption, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): Generator
+        +getResult(): any
+    }
+    class PostBeatCommand {
+        +command: any
+        +executeInst: any
+        +PostBeatCommand(value: any)
+        +execute(): void
+        +getResult(): any
+    }
 }
-class PatchBeat {
-    -result: any
-    -reqParam: any
-    +validation(reqBody: , updateReqOption: any, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats, copyMergedBeatsNEctopicList: any): OptimisticEventDataUpdateForBeats
+package "eventReview_PatchBeat" {
+    class PatchBeat {
+        -result: any
+        -reqParam: any
+        +validation(reqBody: , updateReqOption: any, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats, copyMergedBeatsNEctopicList: any): OptimisticEventDataUpdateForBeats
+    }
 }
-class DeleteBeat {
-    -result: any
-    -reqParam: any
-    +constructor(reqParam: any)
-    +optimisticEventDataUpdate(updateReqOption: UpdateReqOptionProps): void
-    +updateLogic(reqBody: ReqBody, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): OptimisticEventDataUpdateForBeats
-    +_validation(): void
-    +getResult(): any
+package "eventReview_PatchBeatByRangeList" {
+    class PatchBeatByRangeList {
+        +result: any
+        +reqParam: any
+        +PatchBeatByRangeList(reqParam: any)
+        +optimisticEventDataUpdate(updateReqOption: UpdateReqOptionProps, filterBeatsNEctopicList: any): void
+        +updateLogic(reqBody: ReqBody, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): OptimisticEventDataUpdateForBeats
+        +_validation(reqBody: ReqBody, updateReqOption: UpdateReqOption, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats, copyMergedBeatsNEctopicList: any): any
+        +getResult(): any
+    }
+    class PatchBeatByRangeListCommand {
+        +command: any
+        +executeInst: any
+        +PatchBeatByRangeListCommand(value: any)
+        +execute(): void
+        +getResult(): any
+    }
+}
+package "eventReview_PatchBeatByWaveformIndexList" {
+    class PatchBeatByWaveformIndexList {
+        +result: any
+        +reqParam: any
+        +PatchBeatByWaveformIndexList(reqParam: any)
+        +optimisticEventDataUpdate(updateReqOption: UpdateReqOptionProps, filterBeatsNEctopicList: any): void
+        +updateLogic(reqBody: ReqBody, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): OptimisticEventDataUpdateForBeats
+        +_validation(reqBody: ReqBody, updateReqOption: UpdateReqOption, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats, copyMergedBeatsNEctopicList: any): any
+        +getResult(): any
+    }
+    class PatchBeatByWaveformIndexListCommand {
+        +command: any
+        +executeInst: any
+        +PatchBeatByWaveformIndexListCommand(value: any)
+        +execute(): void
+        +getResult(): any
+    }
+}
+package "eventReview_DeleteBeat" {
+    class DeleteBeat {
+        -result: any
+        -reqParam: any
+        +constructor(reqParam: any)
+        +optimisticEventDataUpdate(updateReqOption: UpdateReqOptionProps): void
+        +updateLogic(reqBody: ReqBody, mergedBeatsNEctopicList: OptimisticEventDataUpdateForBeats): OptimisticEventDataUpdateForBeats
+        +_validation(): void
+        +getResult(): any
+    }
+    class DeleteBeatCommand {
+        +command: any
+        +executeInst: any
+        +DeleteBeatCommand(value: any)
+        +execute(): void
+        +getResult(): any
+    }
 }
 OptimisticEventDataUpdate <|-up- EventReviewOptimisticEventDataUpdateForBeatEvent
 EventReviewOptimisticEventDataUpdateForBeatEvent <|-up- PostBeat
 EventReviewOptimisticEventDataUpdateForBeatEvent <|-up- PatchBeat
 EventReviewOptimisticEventDataUpdateForBeatEvent <|-up- DeleteBeat
+PatchBeatByRangeList --> PatchBeat : extends
+PatchBeatByWaveformIndexList --> PatchBeat : extends
+' DeleteBeat --> EventReviewOptimisticEventDataUpdateForBeatEvent : extends
+
 ' ------------------------------------------------------------------------------------------------
 ' ------------------------------------------------------------------------------------------------
 ' ------------------------------------------------------------------------------------------------
@@ -209,5 +269,18 @@ PostPauseCommand -up-> PostPause : uses
 
 PostAVBlockCommand -down-> Command : uses
 PostAVBlockCommand -up-> PostAVBlock : uses
+
+' ------------------------------------------------------------------------------------------------
+' ------------------------------------------------------------------------------------------------
+' ------------------------------------------------------------------------------------------------
+
+PostBeatCommand -down-> Command : uses
+PostBeatCommand -down-> PostBeat : uses
+PatchBeatByWaveformIndexListCommand --> Command : uses
+PatchBeatByWaveformIndexListCommand --> PatchBeatByWaveformIndexList : uses
+PatchBeatByRangeListCommand --> Command : uses
+PatchBeatByRangeListCommand --> PatchBeatByRangeList : uses
+DeleteBeatCommand --> Command : uses
+DeleteBeatCommand --> DeleteBeat : uses
 
 @enduml
